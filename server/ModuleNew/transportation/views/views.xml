@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+<!--     explicit list view definition-->
+    <record model="ir.ui.view" id="transportation_view">
+      <field name="name">Transportation.view</field>
+      <field name="model">transportation.manage</field>
+      <field name="arch" type="xml">
+        <tree string="Pets" default_order="create_date desc">
+          <field name="licensePlate"/>
+          <field name="vehicleType"/>
+          <field name="dayProduce"/>
+          <field name="tonnage"/>
+          <field name="status"/>
+        </tree>
+      </field>
+    </record>
+
+<!--     actions opening views on models-->
+    <record model="ir.actions.act_window" id="transportation_action_window">
+      <field name="name">Transportation window</field>
+      <field name="res_model">transportation.manage</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+<!--     server action to the one above-->
+    <record model="ir.actions.server" id="transportation_action_server">
+      <field name="name">Transportation server</field>
+      <field name="model_id" ref="model_transportation_transportation"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": transportation.manage,
+        }
+      </field>
+    </record>
+
+<!--     Top menu item-->
+    <menuitem name="Transportation" id="transportation.menu_root"/>
+<!--     menu categories-->
+    <menuitem name="Menu 1" id="transportation.menu_1" parent="transportation.menu_root"/>
+    <menuitem name="Menu 2" id="transportation.menu_2" parent="transportation.menu_root"/>
+<!--     actions-->
+    <menuitem name="List" id="transportation.menu_1_list" parent="transportation.menu_1"
+              action="transportation.action_window"/>
+    <menuitem name="Server to list" id="transportation" parent="transportation.menu_2"
+              action="transportation.action_server"/>
+  </data>
+</odoo>
