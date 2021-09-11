@@ -16,14 +16,21 @@
             </field>
         </record>
 
-             actions opening views on models
+<!--             actions opening views on models-->
         <record model="ir.actions.act_window" id="transportation_action_window">
             <field name="name">Transportation window</field>
+            <field name="type">ir.actions.act_window</field>
             <field name="res_model">transportation.manage</field>
             <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                    <p class="oe_view_nocontent_create">
+
+
+              </p>
+            </field>
         </record>
 
-             server action to the one above
+<!--             server action to the one above-->
         <record model="ir.actions.server" id="transportation_action_server">
             <field name="name">Transportation server</field>
             <field name="model_id" ref="model_transportation_transportation"/>
@@ -31,7 +38,7 @@
             <field name="code">
                 action = {
                 "type": "ir.actions.act_window",
-                "view_mode": "tree,form",
+                "view_mode": "transportation_view",
                 "res_model": transportation.manage,
                 }
             </field>
@@ -39,16 +46,16 @@
 
         <!--     Top menu item-->
         <menuitem name="Transportation" id="transportation.menu_root"
-                  action="transportation_view"/>
+                  action="transportation_action_window"/>
 <!--             menu categories-->
-<!--        <menuitem name="Menu 1" id="transportation.menu_1" parent="transportation.menu_root"/>-->
-<!--&lt;!&ndash;                  action="transportation_action_server"/>&ndash;&gt;-->
+        <menuitem name="Menu 1" id="transportation.menu_1" parent="transportation.menu_root"
+                  action="transportation_action_server"/>
 <!--        <menuitem name="Menu 2" id="transportation.menu_2" parent="transportation.menu_root"/>-->
 <!--&lt;!&ndash;                  action="transportation_action_server"/>&ndash;&gt;-->
 <!--        &lt;!&ndash;     actions&ndash;&gt;-->
 <!--        <menuitem name="List" id="transportation.menu_1_list" parent="transportation.menu_1"-->
 <!--                  action="transportation_view"/>-->
 <!--        <menuitem name="Server to list" id="transportation" parent="transportation.menu_2"-->
-<!--                  action="transportation_view"/>-->
+<!--                  action="transportation_action_server"/>-->
     </data>
 </odoo>
